@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<!-- 配置 -->
+<configuration>
+	
+	<!-- 别名 -->
+	<typeAliases>
+		<typeAlias alias="RedPacket" type="cn.freedom.redpacket.pojo.RedPacket"/>
+		<typeAlias alias="UserRedPacket" type="cn.freedom.redpacket.pojo.UserRedPacket"/>
+	</typeAliases>
+	
+	<!-- 引入映射器 -->
+	<mappers>
+		<mapper resource="cn/freedom/redpacket/config/RedPacket.xml"/>
+		<mapper resource="cn/freedom/redpacket/config/UserRedPacket.xml"/>
+	</mappers>
+ 
+</configuration>

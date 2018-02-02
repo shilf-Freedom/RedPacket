@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace = "cn.freedom.redpacket.dao.RedPacketDao">
+
+	<resultMap id="redPacketDaoResultMap" type="cn.freedom.redpacket.pojo.RedPacket">
+		<id property="id" column="id" />
+		<result property="userId" column="user_id"/>
+		<result property="amount" column="amount"/>
+		<result property="sendTime" column="send_time"/>
+		<result property="total" column="total"/>
+		<result property="unitAmount" column="unit_amount"/>
+		<result property="stock" column="stock"/>
+		<result property="version" column="version"/>
+		<result property="note" column="note"/>
+	</resultMap>
+
+	<!-- 查询红包信息 -->
+	<select id="getRedPacket" parameterType="long" resultType="RedPacket" resultMap="redPacketDaoResultMap">
+		select * from T_RED_PACKET where id = #{id}
+	</select>
+	
+	<!-- 查询红包信息（悲观锁） -->
+	<select id="getRedPacketForUpdate" parameterType="long" resultType="RedPacket" resultMap="redPacketDaoResultMap">
+		select * from T_RED_PACKET where id = #{id} for update
+	</select>
+	
+	<!-- 扣减红包个数 -->
+	<update id="decreaseRedPacket" parameterType="long">
+		update T_RED_PACKET set stock = stock - 1 where id = #{id}
+	</update>
+	
+	<!-- 扣减红包个数（乐观锁） -->
+	<update id="decreaseRedPacketForVersion">
+		update T_RED_PACKET set stock = stock - 1, version = version + 1 where id = #{arg0} and version = #{arg1}
+	</update>
+
+</mapper>
+
