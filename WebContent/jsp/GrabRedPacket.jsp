@@ -11,7 +11,7 @@ $(document).ready(function(){
 	var max = 3000;
 	for(var i = 0; i < max; i++){
 		$.post({
-			url:'${ pageContext.request.contextPath }/userRedPacket/grabRedPacket?redPacketId=1&userId='+i,
+			url:'${ pageContext.request.contextPath }/userRedPacket/grabRedPacketByRedis?redPacketId=1&userId='+i,
 			success:function(result){}
 		});
 	}
